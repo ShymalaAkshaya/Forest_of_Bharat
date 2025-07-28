@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Paddi Range</title>
+  
+  <script defer src="script.js"></script>
+
+  <!-- Animate CSS -->
+  <link rel="stylesheet" href="stylestate.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+
+  <!-- Include model-viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <style>
+    #modelContainer {
+      width: 100vw;
+      height: 100vh;
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 999;
+    }
+
+    model-viewer {
+      width: 80%;
+      height: 80%;
+      background-color: black;
+    }
+  </style>
+</head>
+<body>
+<!--plant analysis floating button-->
+   <button class="floating-btn" onclick="plantAnalysis()">
+    🌿
+  </button>
+  <div class="tooltip">Plant Analysis</div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="logo">🌳 Punjab</div>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="indiamap.html">Map</a>
+      <!-- Direction Link -->
+<!-- Direction Link -->
+<a href="#" onclick="openDirection()">Direction</a>
+
+<!-- Slide-in Panel -->
+<div id="directionPanel">
+  <button class="close-btn" onclick="closeDirection()">×</button>
+  <h2 style="color: black;">Direction</h2>
+    <iframe src="https://www.google.com.qa/maps/d/embed?mid=18q1Ks95_pgHtqAFkcYOFsQE8fD10wT0&ehbc=2E312F" 
+       width="100%" height="480" style="border:3;"></iframe>
+</div>
+
+<!-- Dimming Overlay -->
+<div id="pageDimmer"></div>
+
+
+    </nav>
+  </header>
+
+
+
+<div id="pageDimmer"></div>
+  <!-- Main Content -->
+  <main class="main-content">
+    <h1 class="animated infinite bounce delay-2s">PADDI RANGE</h1>
+
+    <!-- About Forest: Text Left -->
+    <section class="about-text">
+      <h2>About Paddi Range Forest</h2>
+      <p>
+        Featuring a wide range of recreational activities, lush green spaces, swaying trees, and exceptional views, Pabbi Forest is another famous
+         wildlife park in Punjab. The unparalleled beauty of Pabbi Range Forest, coupled with a variety of facilities for tourists, makes this 
+         region an exciting place to be explored by individuals intrigued by environmental sciences. According to the people who have visited 
+         Pabbi Forest, the most spellbinding attraction is a lake in the forest, adding further beauty to the woodland. The concerned authorities 
+         have constructed a bridge across the lake to facilitate visitors looking to explore the other side of the woods without any hassles. 
+        
+      </p>
+      <p class="forestintro">
+        Forest area : 3,728 sq kms
+      </p>
+      <p class="forestintro">
+        Best time to visit is in winter, between November and March
+      </p>
+    </section>
+
+    <!-- Forest Image: Right -->
+    <div class="about-image">
+      <img src="aaimages/forest7.jpg" alt="Nallamala Forest Image" />
+    </div>
+    </main>
+        
+         <div class="bottom-row">
+          <div class="weather-card">
+            <h1>Current Weather 🌤️</h1>
+            <p id="location">Paddi Range Forest • Live Updates</p><br>
+            <h3 id="temperature"> Temperature: --°C</h3>
+            <h3 id="weather-description"> Weather: Loading...</h3>
+            <h3 id="humidity"> Humidity: --%</h3>
+            <h3 id="wind"> Wind: --m/s</h3><br>
+            <p class="updated">Updated just now</p>
+          </div>
+
+          <!-- 🔥 Fire Risk Box -->
+  <div class="fire-risk" style="background-color: #fff3e0; padding: 20px; border-radius: 10px; width: 48%;">
+    <h1 >Fire Prediction 🔥</h1>
+    <div id="fire-risk" style="margin-top: 15px; font-weight: bold; font-size: 18px;">Calculating...</div>
+    <h2 style="margin-top: 1rem; font-size: 16px;">🔥 Fire Risk Levels</h2>
+    <ul style="list-style-type: none; padding-left: 0; font-size: 13px; color: #444;">
+      <li><span style="color: rgb(240, 78, 78); font-weight: bold;">🔴 HIGH Fire Risk</span> — Score <b>≥ 60</b></li>
+      <li><span style="color: rgb(228, 113, 6); font-weight: bold;">🟠 MODERATE Fire Risk</span> — Score <b>≥ 30 and &lt; 60</b></li>
+      <li><span style="color: green; font-weight: bold;">🔵 LOW Fire Risk</span> — Score <b>&lt; 30</b></li>
+    </ul>
+  </div>
+          
+        
+
+        <div class="ar-viewer">
+          <h3>Augmented Reality Viewer</h3>
+          <p>Experience in 3D</p>
+          <button onclick="showModel()">Launch AR Experience</button>
+
+      <div id="modelContainer">
+        <model-viewer src="model.glb" alt="A 3D model" auto-rotate camera-controls ar shadow-intensity="1"
+          style="background-color: black;">
+        </model-viewer>
+
+        <!-- Back Button -->
+        <button onclick="hideModel()" style="
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 10px 20px;
+    background-color: #444;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 1000;
+  ">← Back</button>
+      </div>
+
+    </div>
+  
+
+  <!-- Show 3D Model -->
+  <script>
+    function showModel() {
+      document.getElementById("modelContainer").style.display = "block";
+    }
+
+    function hideModel() {
+      document.getElementById("modelContainer").style.display = "none";
+    }
+  </script>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div id="overlay"></div>
+    </div>
+
+  <script>
+  fetch("https://api.openweathermap.org/data/2.5/weather?q=Ludhiana&appid=cf8b710ff8382247ce76a4a0a3a57b27&units=metric")
+    .then(response => response.json())
+    .then(data => {
+      const temp = data.main.temp;
+      const humidity = data.main.humidity;
+      const wind = data.wind.speed;
+      const weather = data.weather[0].description;
+
+      document.getElementById("temperature").textContent = "Temperature: " + temp + "°C";
+      document.getElementById("weather-description").textContent = "Weather: " + weather;
+      document.getElementById("humidity").textContent = "Humidity: " + humidity + "%";
+      document.getElementById("wind").textContent = "Wind: " + wind + " m/s";
+
+      showFireRisk(temp, humidity, wind);
+    })
+    .catch(error => {
+      console.error("Error fetching weather data:", error);
+      document.getElementById("temperature").textContent = "Temperature: N/A";
+      document.getElementById("weather-description").textContent = "Weather: N/A";
+      document.getElementById("humidity").textContent = "Humidity: N/A";
+      document.getElementById("wind").textContent = "Wind: N/A";
+      document.getElementById("fire-risk").textContent = "Fire Risk: N/A";
+    });
+
+  function showFireRisk(temp, humidity, wind) {
+    let score = 0;
+
+    if (temp >= 40) score += 40;
+    else if (temp >= 35) score += 30;
+    else if (temp >= 30) score += 20;
+    else if (temp >= 25) score += 10;
+
+    if (humidity <= 20) score += 30;
+    else if (humidity <= 40) score += 20;
+    else if (humidity <= 60) score += 10;
+
+    if (wind >= 10) score += 20;
+    else if (wind >= 5) score += 10;
+
+    score += 10;
+
+    const riskElement = document.getElementById("fire-risk");
+
+    if (score >= 60) {
+  riskElement.innerHTML = `🔴 HIGH Fire Risk — Score: <b>${score}</b>`;
+  riskElement.style.color = "red";
+} else if (score >= 30) {
+  riskElement.innerHTML = `🟠 MODERATE Fire Risk — Score: <b>${score}</b>`;
+  riskElement.style.color = "orange";
+} else {
+  riskElement.innerHTML = `🔵 LOW Fire Risk — Score: <b>${score}</b>`;
+  riskElement.style.color = "green";
+}
+  }
+
+  </script>
+
+
+<script>
+  // Open modal
+  document.querySelectorAll('[data-modal-target]').forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = document.querySelector(button.getAttribute('data-modal-target'));
+      openModal(modal);
+    });
+  });
+
+  // Close modal
+  document.querySelectorAll('[data-close-button]').forEach(button => {
+    button.addEventListener('click', () => {
+      const modal = button.closest('.modal');
+      closeModal(modal);
+    });
+  });
+
+  // Close modal when clicking outside
+  const overlay = document.getElementById('overlay');
+  overlay.addEventListener('click', () => {
+    document.querySelectorAll('.modal.active').forEach(modal => closeModal(modal));
+  });
+
+  function openModal(modal) {
+    if (modal == null) return;
+    modal.classList.add('active');
+    overlay.classList.add('active');
+  }
+
+  function closeModal(modal) {
+    if (modal == null) return;
+    modal.classList.remove('active');
+    overlay.classList.remove('active');
+  }
+</script>
+
+  <script>
+    function plantAnalysis() {
+      // You can replace this with a modal, a redirect, or AJAX call
+      window.location.href = "http://localhost:5000"; // or show a modal
+    }
+  </script>
+<!-- Direction-->
+  <script>
+  function openDirection() {
+    document.getElementById("directionPanel").classList.add("active");
+    document.getElementById("pageDimmer").classList.add("active");
+  }
+
+  function closeDirection() {
+    document.getElementById("directionPanel").classList.remove("active");
+    document.getElementById("pageDimmer").classList.remove("active");
+  }
+
+  // Close panel if user clicks outside
+  document.getElementById("pageDimmer").addEventListener("click", closeDirection);
+</script>
+
+
+</body>
+</html>
