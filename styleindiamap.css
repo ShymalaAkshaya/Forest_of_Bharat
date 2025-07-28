@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('https://static.vecteezy.com/system/resources/previews/029/503/934/non_2x/green-forest-aerial-view-photo.jpeg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4); /* dim effect */
+  z-index: -1;
+}
+header {
+  background-color: #2f5233;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logo img {
+  height: 30px;
+}
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: bold;
+}
+.map-section {
+    padding: 30px 10px;
+    text-align: center;
+    background-image: url('https://static.vecteezy.com/system/resources/previews/029/503/934/non_2x/green-forest-aerial-view-photo.jpeg'); /* ✅ Replace with your actual image path */
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.4); /* dims the image */
+    z-index: -1;
+  }
+  
+  .map-section h2 {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    text-align: center;
+  }
+  
+  .map-section p {
+    font-size: 1.1rem;
+    text-align: center;
+    margin-bottom: 10px;
+    
+  }
+  
+  .map-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+  }
+
+  .map-container svg {
+    width: 90%;
+    height: 100vh;
+    align-items: center;
+    margin-bottom: 10px;
+}
+  
+path {
+    fill: #a5d6a7; /* Default green shade */
+    stroke: #333;
+    stroke-width: 0.5;
+    cursor: pointer;
+    transition: fill 0.3s ease;
+  }
+
+  path:hover {
+    fill: #66bb6a; /* Darker green on hover */
+  }
+  .forest-btn {
+  background-color: #2d6a4f;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+}
+
+.forest-btn:hover {
+  background-color: #1b4732;
+}
